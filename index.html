@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiesta de Graduación - ANANDI TELLES CHUC</title>
+    
+    <!-- OPTIMIZACIÓN: Pre-conectar a las fuentes para carga ultra rápida -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa: #f8bbd0;
+            --morado: #e1bee7;
+            --azul: #bbdefb;
+            --texto-oscuro: #4a4a4a;
+            --rosa-fuerte: #d81b60;
+            --dorado: #d4af37;
+            --dorado-claro: #f3e5ab;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
+            background-color: #fdfafb;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* --- FONDO ACUARELA --- */
+        .watercolor-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -3; overflow: hidden; background: #fffdfef0;
+        }
+        .title-script {
+            font-family: 'Great Vibes', cursive; 
+            font-size: 4.5rem;
+            color: var(--rosa-fuerte); 
+            line-height: 1; 
+            margin-bottom: 10px;
+            margin-top: 20px;
+            animation: floatTitle 4s ease-in-out infinite;
+        }
+
+        @keyframes floatTitle {
+            0%, 100% { transform: translateY(0); text-shadow: 2px 2px 5px rgba(216, 27, 96, 0.2); }
+            50% { transform: translateY(-8px); text-shadow: 0px 12px 15px rgba(216, 27, 96, 0.4); }
+        }
+        .shimmer-text {
+            margin-top: 30px;
+            font-size: 1.5rem; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--rosa-fuerte) 0%, var(--dorado) 50%, var(--rosa-fuerte) 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3s linear infinite, pulseDropShadow 2s ease-in-out infinite alternate;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes pulseDropShadow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(216, 27, 96, 0.3)); }
+            100% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7)); }
+        }
+        .blob {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.8;
+            animation: moveBlobs 15s infinite alternate ease-in-out;
+        }
+        .blob.pink { background: #f8bbd0; width: 450px; height: 450px; top: -10%; left: -10%; }
+        .blob.purple { background: #e1bee7; width: 350px; height: 350px; top: 40%; right: -10%; animation-delay: -5s; }
+        .blob.blue { background: #bbdefb; width: 450px; height: 450px; bottom: -20%; left: 20%; animation-delay: -10s; }
+
+        @keyframes moveBlobs {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            100% { transform: translate(50px, 50px) scale(1.1) rotate(10deg); }
+        }
+
+        /* --- FLORES FLOTANTES ANIMADAS (SVGs) --- */
+        .flowers-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; pointer-events: none; overflow: hidden;
+        }
+        .flower { position: absolute; top: -10%; opacity: 0.7; animation: fall linear infinite; }
+        .flower svg { width: 100%; height: 100%; }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 500px; margin: 20px auto;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.8);
+            padding-bottom: 5px; position: relative; overflow: hidden;
+        }
+
+        /* --- DECORACIONES FLORALES ESQUINAS --- */
+        .corner-floral {
+            position: absolute; width: 120px; height: 120px;
+            background-size: contain; background-repeat: no-repeat;
+            z-index: 0; opacity: 0.85; pointer-events: none;
+        }
+        .corner-floral {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 C60 10, 70 30, 50 50 C30 30, 40 10, 50 10 Z" fill="%23f8bbd0"/><path d="M90 50 C90 60, 70 70, 50 50 C70 30, 90 40, 90 50 Z" fill="%23e1bee7"/><path d="M50 90 C40 90, 30 70, 50 50 C70 70, 60 90, 50 90 Z" fill="%23bbdefb"/><path d="M10 50 C10 40, 30 30, 50 50 C30 70, 10 60, 10 50 Z" fill="%23f8bbd0"/><circle cx="50" cy="50" r="8" fill="%23d4af37"/><path d="M50 50 Q70 10 90 10" stroke="%23d4af37" stroke-width="2" fill="none"/><path d="M50 50 Q30 90 10 90" stroke="%23d4af37" stroke-width="2" fill="none"/></svg>');
+        }
+        .floral-top-right { top: -20px; right: -20px; transform: rotate(45deg); }
+        .floral-bottom-left { bottom: -20px; left: -20px; transform: rotate(-135deg); }
+        .floral-middle-left { top: 40%; left: -40px; transform: rotate(-90deg); opacity: 0.5; }
+        .floral-middle-right { top: 60%; right: -40px; transform: rotate(90deg); opacity: 0.5; }
+
+        section { padding: 40px 20px; position: relative; z-index: 1; }
+
+        h2 { font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; color: #3f51b5; }
+        h3 { font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--rosa-fuerte); margin-bottom: 5px; }
+        
+        .reveal { opacity: 0; transform: translateY(40px) scale(0.98); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
+
+        /* --- VIDEO Y FECHA (WIDGET) --- */
+        .video-container {
+            border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 20px; border: 3px solid white; background: white;
+        }
+        video { width: 100%; display: block; border-radius: 12px; }
+
+        .date-widget { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 30px 0; background: linear-gradient(90deg, rgba(248,187,208,0.3), rgba(187,222,251,0.3)); padding: 15px; border-radius: 20px; }
+        .date-text { font-size: 1.2rem; font-weight: 700; color: var(--texto-oscuro); }
+        .date-circle { font-size: 2.5rem; font-weight: 700; color: var(--rosa-fuerte); background: white; border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--rosa-fuerte); }
+        .countdown { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+        .time-box { background: white; padding: 12px 10px; border-radius: 12px; min-width: 65px; }
+        .time-box span { display: block; font-size: 1.6rem; font-weight: bold; color: var(--rosa-fuerte); }
+        .time-box label { font-size: 0.7rem; color: #888; text-transform: uppercase; font-weight: 600;}
+
+        /* --- ESTRUCTURA GENERAL DE CARRUSELES --- */
+        .track-overflow {
+            width: 100%; overflow: hidden; position: relative; border-radius: 5px;
+        }
+        .carousel-track {
+            display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .slide {
+            min-width: 100%; object-fit: cover; cursor: pointer;
+        }
+        .carousel-dots {
+            display: flex; justify-content: center; gap: 8px; margin-top: 15px;
+        }
+        .dot {
+            width: 10px; height: 10px; background: #ddd; border-radius: 50%; cursor: pointer; transition: 0.3s;
+        }
+        .dot.active { background: var(--rosa-fuerte); transform: scale(1.3); }
+
+        /* --- MARCO DE FOTO PRINCIPAL (CARRUSEL 1 - VERTICAL) --- */
+        .photo-frame-section { padding: 30px 15px; }
+        .elegant-frame {
+            position: relative; background: white; padding: 15px; border-radius: 5px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15); margin: 0 auto; max-width: 85%;
+            border: 1px solid var(--dorado-claro); z-index: 5;
+        }
+        .elegant-frame::before {
+            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 2px solid var(--dorado); pointer-events: none; z-index: 10;
+        }
+        .elegant-frame .slide { height: 420px; object-fit: cover; } 
+        
+        .corner-decoration {
+            position: absolute; width: 40px; height: 40px; background-color: white;
+            background-size: 60%; background-position: center; background-repeat: no-repeat;
+            z-index: 11; border: 2px solid var(--dorado); border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23d4af37" d="M256 401L28 245l228-154 228 154c-2.5 1.6-230 154-230 154zm-82-114v57c0 0 81 71 164 0 80-35 0-57 0-57s-20 25-82 25-82-25-82-25zm481-83h-28v-65h28v65zm0-85v-28v28h28-28v28zm0 245h-28v-50h28v50z"/></svg>');
+        }
+        .top-left { top: -15px; left: -15px; } .top-right { top: -15px; right: -15px; }
+        .bottom-left { bottom: -15px; left: -15px; } .bottom-right { bottom: -15px; right: -15px; }
+
+        /* --- TARJETAS DE PAPÁS Y AMIGAS --- */
+        .story-card {
+            background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08); margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.8); position: relative;
+        }
+        .story-card .slide { height: 250px; border-radius: 8px; margin-top: 15px;}
+
+        /* --- GALERÍA MOSAICO --- */
+        .masonry-gallery { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
+            margin-top: 20px; 
+            grid-auto-flow: dense; 
+        }
+        .masonry-gallery img {
+            width: 100%; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s; 
+            background: white; 
+            padding: 3px; 
+            cursor: pointer;
+            height: 160px; 
+        }
+        .masonry-gallery img:hover { transform: scale(1.03); z-index: 10; position: relative; }
+        
+        .masonry-gallery img.portrait {
+            grid-row: span 2; 
+            height: 332px; 
+        }
+
+        /* --- LIGHTBOX --- */
+        .lightbox {
+            display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px);
+            align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox img { max-width: 90%; max-height: 85vh; border-radius: 10px; border: 3px solid white; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
+        /* --- MAPA EMBED --- */
+        .map-container {
+            border-radius: 15px; 
+            overflow: hidden; 
+            margin: 20px 0; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border: 3px solid white;
+        }
+        .map-container iframe {
+            width: 100%; 
+            height: 250px; 
+            border: 0; 
+            display: block;
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(45deg, #d81b60, #8e24aa); color: white;
+            padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 600;
+            letter-spacing: 1px; box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4); transition: all 0.3s ease;
+            margin-top: 5px; width: 85%; cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 12px 25px rgba(216, 27, 96, 0.5); }
+        .btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+        /* --- CRÉDITOS DISEÑO MUY CHICO --- */
+        .footer-credits {
+            text-align: right;
+            padding: 5px 15px 10px;
+            font-size: 0.55rem;
+            color: #b0b0b0;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+        }
+        .footer-credits a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        .footer-credits a:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <img id="lightbox-img" src="" alt="Vista previa">
+    </div>
+
+    <div class="watercolor-bg">
+        <div class="blob pink"></div>
+        <div class="blob purple"></div>
+        <div class="blob blue"></div>
+    </div>
+    <div class="flowers-container" id="flowers"></div>
+
+    <div class="container">
+        <div class="corner-floral floral-top-right"></div>
+        <div class="corner-floral floral-bottom-left"></div>
+        <div class="corner-floral floral-middle-left"></div>
+        <div class="corner-floral floral-middle-right"></div>
+
+        <section class="reveal">
+            <h1 class="title-script" >Fiesta de Graduación</h1>
+            <h2 style="font-size: 1.3rem; color: #2c3e50; font-weight: 700;">ANANDI TELLES CHUC</h2>
+            
+            <p style="font-style: italic; font-weight: 400; font-size: 1rem; margin: 15px 0;">
+                "Hoy culmino una etapa de mi vida, y quiero compartir este logro contigo."
+            </p>
+
+            <div class="video-container">
+                <!-- OPTIMIZACIÓN DE VIDEO: Carga diferida de datos del video y uso de un Poster -->
+                <!-- RECUERDA: Sube una foto ligera llamada "poster-video.jpg" a la carpeta img/ -->
+                <video controls autoplay muted loop playsinline preload="metadata"  style="background-color: #fdfafb;">
+                    <source src="img/video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <section class="reveal" style="padding-top: 0;">
+            <div class="date-widget">
+                <div class="date-text">JULIO</div>
+                <div class="date-circle">26</div>
+                <div class="date-text">2:00 PM</div>
+            </div>
+            <h2 style="font-size: 1.1rem; color: #4a4a4a; margin-bottom: 5px;">Faltan:</h2>
+            <div class="countdown">
+                <div class="time-box"><span id="days">00</span><label>Días</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE GRADUACIÓN (Disparador de Confeti) -->
+        <section class="photo-frame-section reveal" id="seccion-graduacion">
+            <h3>Mi Graduación</h3>
+            <div class="elegant-frame carousel-container">
+                <div class="corner-decoration top-left"></div>
+                <div class="corner-decoration top-right"></div>
+                <div class="corner-decoration bottom-left"></div>
+                <div class="corner-decoration bottom-right"></div>
+                
+                <div class="track-overflow" style="border-radius: 3px;">
+                    <div class="carousel-track">
+                        <!-- OPTIMIZACIÓN DE IMÁGENES: loading="lazy" y decoding="async" -->
+                        <img src="img/p5.jpg" class="slide elegant-img" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Graduación 1">
+                        <img src="img/p4.jpg" class="slide elegant-img" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Graduación 2">
+                        <img src="img/p1.jpeg" class="slide elegant-img" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Graduación 3">
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+            <p class="shimmer-text">¡Lo logré!</p>
+        </section>
+
+        <section style="padding-top: 0;">
+            <h2>Mi Historia</h2>
+
+            <div class="story-card reveal carousel-container">
+                <h3 style="font-size: 2rem; margin-bottom: 0;">Mis Papás</h3>
+                <p style="font-size: 0.95rem; margin-top: 5px; color:#666;">Gracias por su apoyo incondicional.</p>
+                
+                <div class="track-overflow">
+                    <div class="carousel-track">
+                        <img src="img/papas1.jpg" class="slide" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Papás 1">
+                        <img src="img/papas2.jpg" class="slide" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Papás 2">
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active"></div><div class="dot"></div>
+                </div>
+            </div>
+
+            <div class="story-card reveal carousel-container">
+                <h3 style="font-size: 2rem; margin-bottom: 0;">Mis Amigas</h3>
+                <p style="font-size: 0.95rem; margin-top: 5px; color:#666;">Las mejores compañeras de aventuras.</p>
+                
+                <div class="track-overflow">
+                    <div class="carousel-track">
+                        <img src="img/am1.jpg" class="slide" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Amigas 1">
+                        <img src="img/am2.jpg" class="slide" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Amigas 2">
+                        <img src="img/am3.jpg" class="slide" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Amigas 3">
+                    </div>
+                </div>
+                <div class="carousel-dots">
+                    <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal">
+            <h2>Lugar del Evento</h2>
+            <p><b>Calle Pablo L Sidar # 11</b><br>Santiago Coltzingo</p>
+            
+            <!-- OPTIMIZACIÓN MAPA: loading="lazy" añadido -->
+            <!--
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!4v1781584521194!6m8!1m7!1sp0WhJNq0-lqU2h2vRrACEA!2m2!1d19.38351685759039!2d-98.5376180378852!3f209.29!4f-29.770000000000003!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación del evento"></iframe>
+            </div>
+añadido -->
+            <a href="https://www.google.com/maps/@19.3835169,-98.537618,2473a,75y,209.29h,60.23t/data=!3m7!1e1!3m5!1sp0WhJNq0-lqU2h2vRrACEA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D29.770000000000003%26panoid%3Dp0WhJNq0-lqU2h2vRrACEA%26yaw%3D209.29!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI2MDYxMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                Abrir app de Maps
+            </a>
+        </section>
+
+        <section class="reveal">
+            <h2>Momentos Inolvidables</h2>
+            <!-- OPTIMIZACIÓN: Carga diferida en todas las imágenes de la galería -->
+            <div class="masonry-gallery">
+                <img src="img/v1.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 1">
+                <img src="img/m12.jpg" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 2">
+                <img src="img/v3.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 3">
+                <img src="img/m4.jpg" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 4">
+               <!--  
+                <img src="img/v5.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 5">
+                
+                <img src="img/m5.jpg" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 6">
+                <img src="img/v9.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 7">
+                <img src="img/v6.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 8">
+                <img src="img/v11.jpg" class="portrait" onclick="openLightbox(this.src)" loading="lazy" decoding="async" alt="Galería 9">
+-->
+            </div>
+        </section>
+
+        <section class="reveal section-contact" id="contact" style="padding-bottom: 20px;">
+            <h3 style="font-size: 3rem;">Acompáñame</h3>
+            <p style="font-size: 0.95rem;">ANANDI TELLES CHUC</p>
+            <p style="font-size: 1.4rem; font-weight: bold; color: var(--rosa-fuerte); margin: 10px 0;">📞 772 114 4467</p>
+            <a href="https://wa.me/527721144467?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20graduación" target="_blank" class="btn btn-whatsapp" id="btn-whatsapp" style="background: #25D366; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);">
+                <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM17.47 16.59C17.22 17.28 16.24 17.89 15.54 18.04C14.95 18.17 14.12 18.27 11.36 17.13C7.83 15.66 5.54 12.07 5.37 11.83C5.2 11.6 3.96 9.94 3.96 8.21C3.96 6.48 4.83 5.64 5.18 5.28C5.46 4.99 5.92 4.86 6.35 4.86C6.49 4.86 6.62 4.87 6.73 4.87C7.11 4.89 7.31 4.91 7.56 5.53C7.86 6.27 8.59 8.06 8.68 8.26C8.78 8.46 8.91 8.7 8.78 8.96C8.65 9.21 8.55 9.33 8.36 9.55C8.17 9.77 7.96 10.03 7.79 10.19C7.6 10.38 7.39 10.58 7.62 10.97C7.84 11.36 8.6 12.6 9.72 13.6C11.16 14.89 12.33 15.29 12.75 15.48C13.08 15.63 13.48 15.6 13.73 15.34C14.04 15.01 14.41 14.46 14.8 13.91C15.11 13.48 15.51 13.42 15.9 13.57C16.3 13.72 18.42 14.77 18.82 14.96C19.22 15.16 19.49 15.25 19.59 15.4C19.69 15.56 19.69 16.32 19.44 17.01L17.47 16.59Z"/></svg>
+                Confirmar Asistencia
+            </a>
+        </section>
+
+        <!-- CRÉDITOS DISEÑO MUY CHICO -->
+        <div class="footer-credits">
+            Diseño: <a href="https://wa.me/5212481855447?text=Hola,%20me%20gustaría%20información%20sobre%20tus%20invitaciones%20digitales" target="_blank">Jordi Martinez</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // --- 1. SVGs PARA FLORES/HOJAS FLOTANTES ---
+        const flowersContainer = document.getElementById('flowers');
+        const svgIcons = [
+            '<svg viewBox="0 0 24 24" fill="#f8bbd0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>',
+            '<svg viewBox="0 0 24 24" fill="#bbdefb"><path d="M17.5 10c0-4.14-3.36-7.5-7.5-7.5S2.5 5.86 2.5 10c0 1.58.5 3.05 1.34 4.25L2 16l1.75-1.84C4.95 15.5 6.42 16 8 16c4.14 0 7.5-3.36 7.5-7.5zm-7.5 4.5c-2.48 0-4.5-2.02-4.5-4.5s2.02-4.5 4.5-4.5 4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5z"/></svg>',
+            '<svg viewBox="0 0 24 24" fill="#d4af37"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>'
+        ];
+        
+        for(let i = 0; i < 20; i++) {
+            let flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.innerHTML = svgIcons[Math.floor(Math.random() * svgIcons.length)];
+            let size = Math.random() * 1.5 + 1.2;
+            flower.style.width = size + 'rem';
+            flower.style.height = size + 'rem';
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = (Math.random() * 10 + 7) + 's'; 
+            flower.style.animationDelay = (Math.random() * 5) + 's';
+            flowersContainer.appendChild(flower);
+        }
+
+        // --- 2. LÓGICA DEL LIGHTBOX (VISTA PREVIA) ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            setTimeout(() => { lightboxImg.src = ''; }, 300);
+        }
+        lightbox.addEventListener('click', function(e) {
+            if (e.target !== lightboxImg) closeLightbox();
+        });
+
+        // --- 3. LÓGICA DE MÚLTIPLES CARRUSELES INDEPENDIENTES ---
+        const carousels = document.querySelectorAll('.carousel-container');
+        
+        carousels.forEach((container) => {
+            const track = container.querySelector('.carousel-track');
+            if (!track) return;
+
+            const slides = Array.from(track.children);
+            const dots = container.querySelectorAll('.dot');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach(dot => dot.classList.remove('active'));
+                if(dots[currentIndex]) dots[currentIndex].classList.add('active');
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                    resetInterval();
+                });
+            });
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+
+            let speed = 3000 + Math.random() * 1500; 
+            let slideInterval = setInterval(nextSlide, speed);
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, speed);
+            }
+
+            container.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            container.addEventListener('mouseleave', resetInterval);
+        });
+
+        // --- 4. SCROLL REVEAL ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 50) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); 
+
+        // --- 5. RELOJ CONTADOR ---
+        const eventDate = new Date(2026, 6, 26, 14, 0, 0).getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance > 0) {
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            } else {
+                document.querySelector(".countdown").innerHTML = "<h3 style='color:var(--rosa-fuerte);'>¡La fiesta ha comenzado!</h3>";
+            }
+        }, 1000);
+
+        // --- 6. LÓGICA DE CONFETI EN LA SECCIÓN "MI GRADUACIÓN" ---
+        function triggerConfetti() {
+            confetti({
+                particleCount: 200, spread: 160, origin: { x: 0.5, y: 0.4 },
+                colors: ['#f8bbd0', '#e1bee7', '#bbdefb', '#d4af37'],
+                startVelocity: 60, gravity: 1.0, ticks: 400, zIndex: 10000
+            });
+            setTimeout(() => {
+                confetti({ particleCount: 80, angle: 60, spread: 80, origin: { x: 0, y: 0.5 }, colors: ['#d81b60', '#fff'] });
+            }, 300);
+            setTimeout(() => {
+                confetti({ particleCount: 80, angle: 120, spread: 80, origin: { x: 1, y: 0.5 }, colors: ['#8e24aa', '#fff'] });
+            }, 600);
+        }
+
+        const gradSection = document.getElementById('seccion-graduacion');
+        let confettiFired = false;
+        
+        const confettiObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !confettiFired) {
+                    triggerConfetti();
+                    confettiFired = true; 
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if(gradSection) {
+            confettiObserver.observe(gradSection);
+        }
+    </script>
+</body>
+</html>
